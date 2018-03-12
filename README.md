@@ -58,3 +58,7 @@ All contracts in this repository have an option of setting an authority, such th
 Once an appropriate governance model is found, the ownership of the contracts owners should be revoked, and the governance contract should become the new authority.
 
 This would enable the community and/or stakeholders to propose parameter changes and apply/reject those changes based on some - currently undefined - governance process.
+
+## Mainnet contracts
+- [ViewToken](https://etherscan.io/address/0xf03f8d65bafa598611c3495124093c56e8f638f0)
+- [VideoPublisher](https://etherscan.io/address/0x9048A059c4beF8775ecF6E24197Fd987B387edc1)

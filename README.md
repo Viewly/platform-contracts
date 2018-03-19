@@ -52,6 +52,18 @@ a.) A sufficiently wealthy user stakes a large amount of tokens behind a name X.
 b.) A malicious and sufficiently wealthy user could acquire control of valuable brand names, and demand a ransom or a "fee" for unstaking, and releasing control to the brand owner, assuming that the ransom is sufficient to offset the negative effects of such behavior on the value of the locked stake. If this edge case materializes as a systemic problem, this contract could be improved by adding *identity oracles* and offsetting the amplitude of locked stake on the transient ownership.
 
 
+
+## VotingStakeDelegator
+
+VotingStakeDelegator allows VIEW Token holders to _delegate_ their stake - in partial or in full - to another Ethereum account. This is useful for two purposes:
+
+a.) **Security**. Allowing users to delegate their voting power to a convenient hot wallet, such as Metamask running in the browser.
+
+b.) **Liquid Democracy**. Stakeholders whom chose to abstain from participation in governance or distribution game voting may delegate their voting power to others, and enable a form of _liquid democracy_. Ideally, individuals posessing good intent, skill and effort would be the beneficiaries of the delegation. 
+
+The delegation is % based, with 3 points of precision _(delegation of 1 is 0.001% and the delegation of 100,000 is 100%)_. A stakeholder can split their delegated stake up to 255 beneficiaries.
+
+
 # Governance
 All contracts in this repository have an option of setting an authority, such that the authority would have the ability of changing *some* contract parameters. 
 

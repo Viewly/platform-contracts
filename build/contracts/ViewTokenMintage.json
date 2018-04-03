@@ -1,0 +1,4008 @@
+{
+  "contractName": "ViewTokenMintage",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "owner_",
+          "type": "address"
+        }
+      ],
+      "name": "setOwner",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "authority_",
+          "type": "address"
+        }
+      ],
+      "name": "setAuthority",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "viewToken",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "authority",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "categories",
+      "outputs": [
+        {
+          "name": "mintLimit",
+          "type": "uint256"
+        },
+        {
+          "name": "amountMinted",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "viewToken_",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "tokens",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "category",
+          "type": "uint8"
+        }
+      ],
+      "name": "TokensMinted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "authority",
+          "type": "address"
+        }
+      ],
+      "name": "LogSetAuthority",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "LogSetOwner",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "name": "tokens",
+          "type": "uint256"
+        },
+        {
+          "name": "categoryId",
+          "type": "uint8"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "addr",
+          "type": "address"
+        }
+      ],
+      "name": "destruct",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalMintLimit",
+      "outputs": [
+        {
+          "name": "total",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x606060405234156200001057600080fd5b60405160208062000fa383398101604052808051906020019091905050600033600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055503373ffffffffffffffffffffffffffffffffffffffff167fce241d7ca1f669fee44b6fc00b8eba2df3bb514eed0f6f668f8f89096e81ed9460405160405180910390a281600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555069d3c21bcecceda10000009050604080519081016040528082601202815260200160008152506003600060058111156200012a57fe5b60ff166006811015156200013a57fe5b600202016000820151816000015560208201518160010155905050604080519081016040528082600902815260200160008152506003600160058111156200017e57fe5b60ff166006811015156200018e57fe5b60020201600082015181600001556020820151816001015590505060408051908101604052808260140281526020016000815250600360026005811115620001d257fe5b60ff16600681101515620001e257fe5b600202016000820151816000015560208201518160010155905050604080519081016040528082600302815260200169180a5d7e86e082e0000081525060038060058111156200022e57fe5b60ff166006811015156200023e57fe5b600202016000820151816000015560208201518160010155905050604080519081016040528082600a02815260200182600a028152506003600460058111156200028457fe5b60ff166006811015156200029457fe5b600202016000820151816000015560208201518160010155905050604080519081016040528082602802815260200160008152506003600580811115620002d757fe5b60ff16600681101515620002e757fe5b600202016000820151816000015560208201518160010155905050806064026200032462000336640100000000026200076c176401000000009004565b1415156200032e57fe5b5050620003b9565b600080600090505b60068160ff1610156200039557620003858260038360ff166006811015156200036357fe5b60020201600001546200039c6401000000000262000b92176401000000009004565b915080806001019150506200033e565b8191505090565b60008282840191508110151515620003b357600080fd5b92915050565b610bda80620003c96000396000f300606060405260043610610099576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806313af40351461009e5780631beb2615146100d75780636112e8ac1461011057806376dd1f861461015e5780637a9e5e4b146101875780638da5cb5b146101c05780639ab4833e14610215578063bf7e214f1461026a578063c6cdbe5e146102bf575b600080fd5b34156100a957600080fd5b6100d5600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506102fd565b005b34156100e257600080fd5b61010e600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506103df565b005b341561011b57600080fd5b61015c600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001909190803560ff16906020019091905050610431565b005b341561016957600080fd5b61017161076c565b6040518082815260200191505060405180910390f35b341561019257600080fd5b6101be600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506107b9565b005b34156101cb57600080fd5b6101d3610899565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561022057600080fd5b6102286108bf565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561027557600080fd5b61027d6108e5565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156102ca57600080fd5b6102e0600480803590602001909190505061090a565b604051808381526020018281526020019250505060405180910390f35b61032b336000357fffffffff0000000000000000000000000000000000000000000000000000000016610933565b151561033657600080fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167fce241d7ca1f669fee44b6fc00b8eba2df3bb514eed0f6f668f8f89096e81ed9460405160405180910390a250565b61040d336000357fffffffff0000000000000000000000000000000000000000000000000000000016610933565b151561041857600080fd5b8073ffffffffffffffffffffffffffffffffffffffff16ff5b6000610461336000357fffffffff0000000000000000000000000000000000000000000000000000000016610933565b151561046c57600080fd5b60008311151561047b57600080fd5b600382600581111561048957fe5b60ff1660068110151561049857fe5b60020201905080600001546104b1848360010154610b92565b111515156104be57600080fd5b8260038360058111156104cd57fe5b60ff166006811015156104dc57fe5b6002020160010160008282540192505081905550600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166340c10f1930856040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200182815260200192505050600060405180830381600087803b15156105b457600080fd5b6102c65a03f115156105c557600080fd5b505050600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166323b872dd3086866000604051602001526040518463ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019350505050602060405180830381600087803b15156106c957600080fd5b6102c65a03f115156106da57600080fd5b50505060405180519050507f76d60a91a67c624bb26c8f8d753854f29a83ca2f9b903c6bd8ad5d9042424517848484604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200183815260200182600581111561075157fe5b60ff168152602001935050505060405180910390a150505050565b600080600090505b60068160ff1610156107b2576107a38260038360ff1660068110151561079657fe5b6002020160000154610b92565b91508080600101915050610774565b8191505090565b6107e7336000357fffffffff0000000000000000000000000000000000000000000000000000000016610933565b15156107f257600080fd5b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f1abebea81bfa2637f28358c371278fb15ede7ea8dd28d2e03b112ff6d936ada460405160405180910390a250565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60038160068110151561091957fe5b600202016000915090508060000154908060010154905082565b60003073ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff1614156109725760019050610b8c565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff1614156109d15760019050610b8c565b600073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415610a305760009050610b8c565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663b70096138430856000604051602001526040518463ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001827bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19167bffffffffffffffffffffffffffffffffffffffffffffffffffffffff191681526020019350505050602060405180830381600087803b1515610b6e57600080fd5b6102c65a03f11515610b7f57600080fd5b5050506040518051905090505b92915050565b60008282840191508110151515610ba857600080fd5b929150505600a165627a7a723058202383a9f1494470ec16523df914802de8b9f3f60d47ad7a9219b8350ac0003f1e0029",
+  "deployedBytecode": "0x606060405260043610610099576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806313af40351461009e5780631beb2615146100d75780636112e8ac1461011057806376dd1f861461015e5780637a9e5e4b146101875780638da5cb5b146101c05780639ab4833e14610215578063bf7e214f1461026a578063c6cdbe5e146102bf575b600080fd5b34156100a957600080fd5b6100d5600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506102fd565b005b34156100e257600080fd5b61010e600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506103df565b005b341561011b57600080fd5b61015c600480803573ffffffffffffffffffffffffffffffffffffffff1690602001909190803590602001909190803560ff16906020019091905050610431565b005b341561016957600080fd5b61017161076c565b6040518082815260200191505060405180910390f35b341561019257600080fd5b6101be600480803573ffffffffffffffffffffffffffffffffffffffff169060200190919050506107b9565b005b34156101cb57600080fd5b6101d3610899565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561022057600080fd5b6102286108bf565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b341561027557600080fd5b61027d6108e5565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b34156102ca57600080fd5b6102e0600480803590602001909190505061090a565b604051808381526020018281526020019250505060405180910390f35b61032b336000357fffffffff0000000000000000000000000000000000000000000000000000000016610933565b151561033657600080fd5b80600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167fce241d7ca1f669fee44b6fc00b8eba2df3bb514eed0f6f668f8f89096e81ed9460405160405180910390a250565b61040d336000357fffffffff0000000000000000000000000000000000000000000000000000000016610933565b151561041857600080fd5b8073ffffffffffffffffffffffffffffffffffffffff16ff5b6000610461336000357fffffffff0000000000000000000000000000000000000000000000000000000016610933565b151561046c57600080fd5b60008311151561047b57600080fd5b600382600581111561048957fe5b60ff1660068110151561049857fe5b60020201905080600001546104b1848360010154610b92565b111515156104be57600080fd5b8260038360058111156104cd57fe5b60ff166006811015156104dc57fe5b6002020160010160008282540192505081905550600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166340c10f1930856040518363ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200182815260200192505050600060405180830381600087803b15156105b457600080fd5b6102c65a03f115156105c557600080fd5b505050600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166323b872dd3086866000604051602001526040518463ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018281526020019350505050602060405180830381600087803b15156106c957600080fd5b6102c65a03f115156106da57600080fd5b50505060405180519050507f76d60a91a67c624bb26c8f8d753854f29a83ca2f9b903c6bd8ad5d9042424517848484604051808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200183815260200182600581111561075157fe5b60ff168152602001935050505060405180910390a150505050565b600080600090505b60068160ff1610156107b2576107a38260038360ff1660068110151561079657fe5b6002020160000154610b92565b91508080600101915050610774565b8191505090565b6107e7336000357fffffffff0000000000000000000000000000000000000000000000000000000016610933565b15156107f257600080fd5b806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff167f1abebea81bfa2637f28358c371278fb15ede7ea8dd28d2e03b112ff6d936ada460405160405180910390a250565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1681565b60038160068110151561091957fe5b600202016000915090508060000154908060010154905082565b60003073ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff1614156109725760019050610b8c565b600160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168373ffffffffffffffffffffffffffffffffffffffff1614156109d15760019050610b8c565b600073ffffffffffffffffffffffffffffffffffffffff166000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff161415610a305760009050610b8c565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663b70096138430856000604051602001526040518463ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001827bffffffffffffffffffffffffffffffffffffffffffffffffffffffff19167bffffffffffffffffffffffffffffffffffffffffffffffffffffffff191681526020019350505050602060405180830381600087803b1515610b6e57600080fd5b6102c65a03f11515610b7f57600080fd5b5050506040518051905090505b92915050565b60008282840191508110151515610ba857600080fd5b929150505600a165627a7a723058202383a9f1494470ec16523df914802de8b9f3f60d47ad7a9219b8350ac0003f1e0029",
+  "sourceMap": "373:1981:7:-;;;812:770;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;908:12;1079:10:0;1071:5;;:18;;;;;;;;;;;;;;;;;;1111:10;1099:23;;;;;;;;;;;;887:10:7;875:9;;:22;;;;;;;;;;;;;;;;;;923:13;908:28;;989:31;;;;;;;;;1003:7;998:2;:12;989:31;;;;1012:7;989:31;;;946:10;963:15;957:22;;;;;;;;946:34;;;;;;;;;;;;;;:74;;;;;;;;;;;;;;;;;;;1073:30;;;;;;;;;1086:7;1082:1;:11;1073:30;;;;1095:7;1073:30;;;1030:10;1047:21;1041:28;;;;;;;;1030:40;;;;;;;;;;;;;;:73;;;;;;;;;;;;;;;;;;;1156:31;;;;;;;;;1170:7;1165:2;:12;1156:31;;;;1179:7;1156:31;;;1113:10;1130:19;1124:26;;;;;;;;1113:38;;;;;;;;;;;;;;:74;;;;;;;;;;;;;;;;;;;1240:35;;;;;;;;;1253:7;1249:1;:11;1240:35;;;;1262:12;1240:35;;;1197:10;1214:19;1208:26;;;;;;;;1197:38;;;;;;;;;;;;;;:78;;;;;;;;;;;;;;;;;;;1328:36;;;;;;;;;1342:7;1337:2;:12;1328:36;;;;1356:7;1351:2;:12;1328:36;;;1285:10;1302:19;1296:26;;;;;;;;1285:38;;;;;;;;;;;;;;:79;;;;;;;;;;;;;;;;;;;1417:31;;;;;;;;;1431:7;1426:2;:12;1417:31;;;;1440:7;1417:31;;;1374:10;1391:19;1385:26;;;;;;;;1374:38;;;;;;;;;;;;;;:74;;;;;;;;;;;;;;;;;;;1567:7;1561:3;:13;1541:16;:14;;;;;:16;;;:::i;:::-;:33;1534:41;;;;;;812:770;;373:1981;;2149:203;2196:10;2221:7;2231:1;2221:11;;2216:109;2238:17;2234:1;:21;;;2216:109;;;2281:35;2285:5;2292:10;2303:1;2292:13;;;;;;;;;;;;;;:23;;;2281:3;;;;;:35;;;:::i;:::-;2273:43;;2257:4;;;;;;;2216:109;;;2340:5;2333:12;;2149:203;;:::o;744:102:3:-;796:6;837:1;831;827;:5;823:9;;;822:16;;814:25;;;;;;;;744:102;;;;:::o;373:1981:7:-;;;;;;;",
+  "deployedSourceMap": "373:1981:7:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1135:125:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;2064:79:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;1588:470;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2149:203;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1266:153:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;1003:26;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;638:24:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;967:30:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;668:29:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1135:125:0;1457:33;1470:10;1482:7;;;;1457:12;:33::i;:::-;1449:42;;;;;;;;1219:6;1211:5;;:14;;;;;;;;;;;;;;;;;;1247:5;;;;;;;;;;;1235:18;;;;;;;;;;;;1135:125;:::o;2064:79:7:-;1457:33:0;1470:10;1482:7;;;;1457:12;:33::i;:::-;1449:42;;;;;;;;2131:4:7;2118:18;;;1588:470;1708:25;1457:33:0;1470:10;1482:7;;;;1457:12;:33::i;:::-;1449:42;;;;;;;;1696:1:7;1687:6;:10;1679:19;;;;;;;;1736:10;1753;1747:17;;;;;;;;1736:29;;;;;;;;;;;;;;1708:57;;1821:8;:18;;;1783:34;1787:6;1795:8;:21;;;1783:3;:34::i;:::-;:56;;1775:65;;;;;;;;1897:6;1851:10;1868;1862:17;;;;;;;;1851:29;;;;;;;;;;;;;;:42;;;:52;;;;;;;;;;;1913:9;;;;;;;;;;;:14;;;1928:4;1934:6;1913:28;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1951:9;;;;;;;;;;;:22;;;1974:4;1980:9;1991:6;1951:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;2008:43;2021:9;2032:6;2040:10;2008:43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1588:470;;;;:::o;2149:203::-;2196:10;2221:7;2231:1;2221:11;;2216:109;2238:17;2234:1;:21;;;2216:109;;;2281:35;2285:5;2292:10;2303:1;2292:13;;;;;;;;;;;;;;:23;;;2281:3;:35::i;:::-;2273:43;;2257:4;;;;;;;2216:109;;;2340:5;2333:12;;2149:203;;:::o;1266:153:0:-;1457:33;1470:10;1482:7;;;;1457:12;:33::i;:::-;1449:42;;;;;;;;1366:10;1354:9;;:22;;;;;;;;;;;;;;;;;;1402:9;;;;;;;;;;;1386:26;;;;;;;;;;;;1266:153;:::o;1003:26::-;;;;;;;;;;;;;:::o;638:24:7:-;;;;;;;;;;;;;:::o;967:30:0:-;;;;;;;;;;;;;:::o;668:29:7:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;1515:361:0:-;1585:4;1620;1605:20;;:3;:20;;;1601:269;;;1648:4;1641:11;;;;1601:269;1680:5;;;;;;;;;;;1673:12;;:3;:12;;;1669:201;;;1708:4;1701:11;;;;1669:201;1758:1;1733:27;;:9;;;;;;;;;;;:27;;;1729:141;;;1783:5;1776:12;;;;1729:141;1826:9;;;;;;;;;;;:17;;;1844:3;1849:4;1855:3;1826:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1819:40;;1515:361;;;;;:::o;744:102:3:-;796:6;837:1;831;827;:5;823:9;;;822:16;;814:25;;;;;;;;744:102;;;;:::o",
+  "source": "// The MIT License (MIT)\n// Copyright (c) 2017 Viewly (https://view.ly)\n\npragma solidity ^0.4.18;\n\nimport \"./dappsys/math.sol\";\nimport \"./dappsys/token.sol\";\nimport \"./dappsys/auth.sol\";\n\n/*\n * ViewTokenMintage contract is used to mint VIEW Tokens within the\n * constraints set in the Viewly Whitepaper. It tracks total minted tokens for\n * each distribution category.\n */\ncontract ViewTokenMintage is DSAuth, DSMath {\n\n    enum CategoryId {\n        Team,\n        Supporters,\n        Creators,\n        Bounties,\n        SeedSale,\n        MainSale\n    }\n\n    struct Category {\n        uint mintLimit;\n        uint amountMinted;\n    }\n\n    DSToken public viewToken;\n    Category[6] public categories;\n\n    event TokensMinted(\n        address recipient,\n        uint tokens,\n        CategoryId category\n    );\n\n    function ViewTokenMintage(DSToken viewToken_) public {\n        viewToken = viewToken_;\n\n        uint MILLION = 1000000 ether;\n        categories[uint8(CategoryId.Team)]       = Category(18 * MILLION, 0 ether);\n        categories[uint8(CategoryId.Supporters)] = Category(9 * MILLION, 0 ether);\n        categories[uint8(CategoryId.Creators)]   = Category(20 * MILLION, 0 ether);\n        categories[uint8(CategoryId.Bounties)]   = Category(3 * MILLION, 113528 ether);\n        categories[uint8(CategoryId.SeedSale)]   = Category(10 * MILLION, 10 * MILLION);\n        categories[uint8(CategoryId.MainSale)]   = Category(40 * MILLION, 0 ether);\n\n        // Total VIEW token mintage supply must be limited to exactly 100M\n        assert(totalMintLimit() == 100 * MILLION);\n    }\n\n    function mint(address recipient, uint tokens, CategoryId categoryId) public auth {\n        require(tokens > 0);\n        Category storage category = categories[uint8(categoryId)];\n        require(add(tokens, category.amountMinted) <= category.mintLimit);\n\n        categories[uint8(categoryId)].amountMinted += tokens;\n        viewToken.mint(this, tokens);\n        viewToken.transferFrom(this, recipient, tokens);\n        TokensMinted(recipient, tokens, categoryId);\n    }\n\n    function destruct(address addr) public auth {\n        selfdestruct(addr);\n    }\n\n    function totalMintLimit() public view returns (uint total) {\n      for (uint8 i = 0; i < categories.length; i ++) {\n        total = add(total, categories[i].mintLimit);\n      }\n\n      return total;\n    }\n}\n",
+  "sourcePath": "/home/user/GitHub/Viewly/platform-contracts/contracts/view_token_mintage.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/home/user/GitHub/Viewly/platform-contracts/contracts/view_token_mintage.sol",
+      "exportedSymbols": {
+        "ViewTokenMintage": [
+          1371
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".18"
+          ]
+        },
+        "id": 1118,
+        "name": "PragmaDirective",
+        "src": "73:24:7"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 689,
+          "absolutePath": "/home/user/GitHub/Viewly/platform-contracts/contracts/dappsys/math.sol",
+          "file": "./dappsys/math.sol",
+          "scope": 1372,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 1119,
+        "name": "ImportDirective",
+        "src": "99:28:7"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 1117,
+          "absolutePath": "/home/user/GitHub/Viewly/platform-contracts/contracts/dappsys/token.sol",
+          "file": "./dappsys/token.sol",
+          "scope": 1372,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 1120,
+        "name": "ImportDirective",
+        "src": "128:29:7"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 132,
+          "absolutePath": "/home/user/GitHub/Viewly/platform-contracts/contracts/dappsys/auth.sol",
+          "file": "./dappsys/auth.sol",
+          "scope": 1372,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 1121,
+        "name": "ImportDirective",
+        "src": "158:28:7"
+      },
+      {
+        "attributes": {
+          "contractDependencies": [
+            22,
+            131,
+            688
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1371,
+            688,
+            131,
+            22
+          ],
+          "name": "ViewTokenMintage",
+          "scope": 1372
+        },
+        "children": [
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "DSAuth",
+                  "referencedDeclaration": 131,
+                  "type": "contract DSAuth"
+                },
+                "id": 1122,
+                "name": "UserDefinedTypeName",
+                "src": "402:6:7"
+              }
+            ],
+            "id": 1123,
+            "name": "InheritanceSpecifier",
+            "src": "402:6:7"
+          },
+          {
+            "attributes": {
+              "arguments": [
+                null
+              ]
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "DSMath",
+                  "referencedDeclaration": 688,
+                  "type": "contract DSMath"
+                },
+                "id": 1124,
+                "name": "UserDefinedTypeName",
+                "src": "410:6:7"
+              }
+            ],
+            "id": 1125,
+            "name": "InheritanceSpecifier",
+            "src": "410:6:7"
+          },
+          {
+            "attributes": {
+              "canonicalName": "ViewTokenMintage.CategoryId",
+              "name": "CategoryId"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "Team"
+                },
+                "id": 1126,
+                "name": "EnumValue",
+                "src": "450:4:7"
+              },
+              {
+                "attributes": {
+                  "name": "Supporters"
+                },
+                "id": 1127,
+                "name": "EnumValue",
+                "src": "464:10:7"
+              },
+              {
+                "attributes": {
+                  "name": "Creators"
+                },
+                "id": 1128,
+                "name": "EnumValue",
+                "src": "484:8:7"
+              },
+              {
+                "attributes": {
+                  "name": "Bounties"
+                },
+                "id": 1129,
+                "name": "EnumValue",
+                "src": "502:8:7"
+              },
+              {
+                "attributes": {
+                  "name": "SeedSale"
+                },
+                "id": 1130,
+                "name": "EnumValue",
+                "src": "520:8:7"
+              },
+              {
+                "attributes": {
+                  "name": "MainSale"
+                },
+                "id": 1131,
+                "name": "EnumValue",
+                "src": "538:8:7"
+              }
+            ],
+            "id": 1132,
+            "name": "EnumDefinition",
+            "src": "424:128:7"
+          },
+          {
+            "attributes": {
+              "canonicalName": "ViewTokenMintage.Category",
+              "name": "Category",
+              "scope": 1371,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "mintLimit",
+                  "scope": 1137,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 1133,
+                    "name": "ElementaryTypeName",
+                    "src": "584:4:7"
+                  }
+                ],
+                "id": 1134,
+                "name": "VariableDeclaration",
+                "src": "584:14:7"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "amountMinted",
+                  "scope": 1137,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint",
+                      "type": "uint256"
+                    },
+                    "id": 1135,
+                    "name": "ElementaryTypeName",
+                    "src": "608:4:7"
+                  }
+                ],
+                "id": 1136,
+                "name": "VariableDeclaration",
+                "src": "608:17:7"
+              }
+            ],
+            "id": 1137,
+            "name": "StructDefinition",
+            "src": "558:74:7"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "viewToken",
+              "scope": 1371,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "contract DSToken",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "DSToken",
+                  "referencedDeclaration": 1116,
+                  "type": "contract DSToken"
+                },
+                "id": 1138,
+                "name": "UserDefinedTypeName",
+                "src": "638:7:7"
+              }
+            ],
+            "id": 1139,
+            "name": "VariableDeclaration",
+            "src": "638:24:7"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "categories",
+              "scope": 1371,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "type": "struct ViewTokenMintage.Category storage ref[6] storage pointer"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "Category",
+                      "referencedDeclaration": 1137,
+                      "type": "struct ViewTokenMintage.Category storage pointer"
+                    },
+                    "id": 1140,
+                    "name": "UserDefinedTypeName",
+                    "src": "668:8:7"
+                  },
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "hexvalue": "36",
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "subdenomination": null,
+                      "token": "number",
+                      "type": "int_const 6",
+                      "value": "6"
+                    },
+                    "id": 1141,
+                    "name": "Literal",
+                    "src": "677:1:7"
+                  }
+                ],
+                "id": 1142,
+                "name": "ArrayTypeName",
+                "src": "668:11:7"
+              }
+            ],
+            "id": 1143,
+            "name": "VariableDeclaration",
+            "src": "668:29:7"
+          },
+          {
+            "attributes": {
+              "anonymous": false,
+              "name": "TokensMinted"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "recipient",
+                      "scope": 1151,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 1144,
+                        "name": "ElementaryTypeName",
+                        "src": "732:7:7"
+                      }
+                    ],
+                    "id": 1145,
+                    "name": "VariableDeclaration",
+                    "src": "732:17:7"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "tokens",
+                      "scope": 1151,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 1146,
+                        "name": "ElementaryTypeName",
+                        "src": "759:4:7"
+                      }
+                    ],
+                    "id": 1147,
+                    "name": "VariableDeclaration",
+                    "src": "759:11:7"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "indexed": false,
+                      "name": "category",
+                      "scope": 1151,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "enum ViewTokenMintage.CategoryId",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "CategoryId",
+                          "referencedDeclaration": 1132,
+                          "type": "enum ViewTokenMintage.CategoryId"
+                        },
+                        "id": 1148,
+                        "name": "UserDefinedTypeName",
+                        "src": "780:10:7"
+                      }
+                    ],
+                    "id": 1149,
+                    "name": "VariableDeclaration",
+                    "src": "780:19:7"
+                  }
+                ],
+                "id": 1150,
+                "name": "ParameterList",
+                "src": "722:83:7"
+              }
+            ],
+            "id": 1151,
+            "name": "EventDefinition",
+            "src": "704:102:7"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "modifiers": [
+                null
+              ],
+              "name": "ViewTokenMintage",
+              "payable": false,
+              "scope": 1371,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "viewToken_",
+                      "scope": 1260,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract DSToken",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "DSToken",
+                          "referencedDeclaration": 1116,
+                          "type": "contract DSToken"
+                        },
+                        "id": 1152,
+                        "name": "UserDefinedTypeName",
+                        "src": "838:7:7"
+                      }
+                    ],
+                    "id": 1153,
+                    "name": "VariableDeclaration",
+                    "src": "838:18:7"
+                  }
+                ],
+                "id": 1154,
+                "name": "ParameterList",
+                "src": "837:20:7"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1155,
+                "name": "ParameterList",
+                "src": "865:0:7"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "contract DSToken"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1139,
+                              "type": "contract DSToken",
+                              "value": "viewToken"
+                            },
+                            "id": 1156,
+                            "name": "Identifier",
+                            "src": "875:9:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1153,
+                              "type": "contract DSToken",
+                              "value": "viewToken_"
+                            },
+                            "id": 1157,
+                            "name": "Identifier",
+                            "src": "887:10:7"
+                          }
+                        ],
+                        "id": 1158,
+                        "name": "Assignment",
+                        "src": "875:22:7"
+                      }
+                    ],
+                    "id": 1159,
+                    "name": "ExpressionStatement",
+                    "src": "875:22:7"
+                  },
+                  {
+                    "attributes": {
+                      "assignments": [
+                        1161
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "name": "MILLION",
+                          "scope": 1260,
+                          "stateVariable": false,
+                          "storageLocation": "default",
+                          "type": "uint256",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "uint",
+                              "type": "uint256"
+                            },
+                            "id": 1160,
+                            "name": "ElementaryTypeName",
+                            "src": "908:4:7"
+                          }
+                        ],
+                        "id": 1161,
+                        "name": "VariableDeclaration",
+                        "src": "908:12:7"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "hexvalue": "31303030303030",
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "subdenomination": "ether",
+                          "token": "number",
+                          "type": "int_const 1000000000000000000000000",
+                          "value": "1000000"
+                        },
+                        "id": 1162,
+                        "name": "Literal",
+                        "src": "923:13:7"
+                      }
+                    ],
+                    "id": 1163,
+                    "name": "VariableDeclarationStatement",
+                    "src": "908:28:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "struct ViewTokenMintage.Category storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "struct ViewTokenMintage.Category storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1143,
+                                  "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                  "value": "categories"
+                                },
+                                "id": 1164,
+                                "name": "Identifier",
+                                "src": "946:10:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint8",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                          "typeString": "enum ViewTokenMintage.CategoryId"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint8)",
+                                      "value": "uint8"
+                                    },
+                                    "id": 1165,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "957:5:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "member_name": "Team",
+                                      "referencedDeclaration": null,
+                                      "type": "enum ViewTokenMintage.CategoryId"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1132,
+                                          "type": "type(enum ViewTokenMintage.CategoryId)",
+                                          "value": "CategoryId"
+                                        },
+                                        "id": 1166,
+                                        "name": "Identifier",
+                                        "src": "963:10:7"
+                                      }
+                                    ],
+                                    "id": 1167,
+                                    "name": "MemberAccess",
+                                    "src": "963:15:7"
+                                  }
+                                ],
+                                "id": 1168,
+                                "name": "FunctionCall",
+                                "src": "957:22:7"
+                              }
+                            ],
+                            "id": 1169,
+                            "name": "IndexAccess",
+                            "src": "946:34:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct ViewTokenMintage.Category memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1137,
+                                  "type": "type(struct ViewTokenMintage.Category storage pointer)",
+                                  "value": "Category"
+                                },
+                                "id": 1170,
+                                "name": "Identifier",
+                                "src": "989:8:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "*",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "hexvalue": "3138",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "subdenomination": null,
+                                      "token": "number",
+                                      "type": "int_const 18",
+                                      "value": "18"
+                                    },
+                                    "id": 1171,
+                                    "name": "Literal",
+                                    "src": "998:2:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1161,
+                                      "type": "uint256",
+                                      "value": "MILLION"
+                                    },
+                                    "id": 1172,
+                                    "name": "Identifier",
+                                    "src": "1003:7:7"
+                                  }
+                                ],
+                                "id": 1173,
+                                "name": "BinaryOperation",
+                                "src": "998:12:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": "ether",
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 1174,
+                                "name": "Literal",
+                                "src": "1012:7:7"
+                              }
+                            ],
+                            "id": 1175,
+                            "name": "FunctionCall",
+                            "src": "989:31:7"
+                          }
+                        ],
+                        "id": 1176,
+                        "name": "Assignment",
+                        "src": "946:74:7"
+                      }
+                    ],
+                    "id": 1177,
+                    "name": "ExpressionStatement",
+                    "src": "946:74:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "struct ViewTokenMintage.Category storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "struct ViewTokenMintage.Category storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1143,
+                                  "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                  "value": "categories"
+                                },
+                                "id": 1178,
+                                "name": "Identifier",
+                                "src": "1030:10:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint8",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                          "typeString": "enum ViewTokenMintage.CategoryId"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint8)",
+                                      "value": "uint8"
+                                    },
+                                    "id": 1179,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "1041:5:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "member_name": "Supporters",
+                                      "referencedDeclaration": null,
+                                      "type": "enum ViewTokenMintage.CategoryId"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1132,
+                                          "type": "type(enum ViewTokenMintage.CategoryId)",
+                                          "value": "CategoryId"
+                                        },
+                                        "id": 1180,
+                                        "name": "Identifier",
+                                        "src": "1047:10:7"
+                                      }
+                                    ],
+                                    "id": 1181,
+                                    "name": "MemberAccess",
+                                    "src": "1047:21:7"
+                                  }
+                                ],
+                                "id": 1182,
+                                "name": "FunctionCall",
+                                "src": "1041:28:7"
+                              }
+                            ],
+                            "id": 1183,
+                            "name": "IndexAccess",
+                            "src": "1030:40:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct ViewTokenMintage.Category memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1137,
+                                  "type": "type(struct ViewTokenMintage.Category storage pointer)",
+                                  "value": "Category"
+                                },
+                                "id": 1184,
+                                "name": "Identifier",
+                                "src": "1073:8:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "*",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "hexvalue": "39",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "subdenomination": null,
+                                      "token": "number",
+                                      "type": "int_const 9",
+                                      "value": "9"
+                                    },
+                                    "id": 1185,
+                                    "name": "Literal",
+                                    "src": "1082:1:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1161,
+                                      "type": "uint256",
+                                      "value": "MILLION"
+                                    },
+                                    "id": 1186,
+                                    "name": "Identifier",
+                                    "src": "1086:7:7"
+                                  }
+                                ],
+                                "id": 1187,
+                                "name": "BinaryOperation",
+                                "src": "1082:11:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": "ether",
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 1188,
+                                "name": "Literal",
+                                "src": "1095:7:7"
+                              }
+                            ],
+                            "id": 1189,
+                            "name": "FunctionCall",
+                            "src": "1073:30:7"
+                          }
+                        ],
+                        "id": 1190,
+                        "name": "Assignment",
+                        "src": "1030:73:7"
+                      }
+                    ],
+                    "id": 1191,
+                    "name": "ExpressionStatement",
+                    "src": "1030:73:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "struct ViewTokenMintage.Category storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "struct ViewTokenMintage.Category storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1143,
+                                  "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                  "value": "categories"
+                                },
+                                "id": 1192,
+                                "name": "Identifier",
+                                "src": "1113:10:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint8",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                          "typeString": "enum ViewTokenMintage.CategoryId"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint8)",
+                                      "value": "uint8"
+                                    },
+                                    "id": 1193,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "1124:5:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "member_name": "Creators",
+                                      "referencedDeclaration": null,
+                                      "type": "enum ViewTokenMintage.CategoryId"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1132,
+                                          "type": "type(enum ViewTokenMintage.CategoryId)",
+                                          "value": "CategoryId"
+                                        },
+                                        "id": 1194,
+                                        "name": "Identifier",
+                                        "src": "1130:10:7"
+                                      }
+                                    ],
+                                    "id": 1195,
+                                    "name": "MemberAccess",
+                                    "src": "1130:19:7"
+                                  }
+                                ],
+                                "id": 1196,
+                                "name": "FunctionCall",
+                                "src": "1124:26:7"
+                              }
+                            ],
+                            "id": 1197,
+                            "name": "IndexAccess",
+                            "src": "1113:38:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct ViewTokenMintage.Category memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1137,
+                                  "type": "type(struct ViewTokenMintage.Category storage pointer)",
+                                  "value": "Category"
+                                },
+                                "id": 1198,
+                                "name": "Identifier",
+                                "src": "1156:8:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "*",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "hexvalue": "3230",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "subdenomination": null,
+                                      "token": "number",
+                                      "type": "int_const 20",
+                                      "value": "20"
+                                    },
+                                    "id": 1199,
+                                    "name": "Literal",
+                                    "src": "1165:2:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1161,
+                                      "type": "uint256",
+                                      "value": "MILLION"
+                                    },
+                                    "id": 1200,
+                                    "name": "Identifier",
+                                    "src": "1170:7:7"
+                                  }
+                                ],
+                                "id": 1201,
+                                "name": "BinaryOperation",
+                                "src": "1165:12:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": "ether",
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 1202,
+                                "name": "Literal",
+                                "src": "1179:7:7"
+                              }
+                            ],
+                            "id": 1203,
+                            "name": "FunctionCall",
+                            "src": "1156:31:7"
+                          }
+                        ],
+                        "id": 1204,
+                        "name": "Assignment",
+                        "src": "1113:74:7"
+                      }
+                    ],
+                    "id": 1205,
+                    "name": "ExpressionStatement",
+                    "src": "1113:74:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "struct ViewTokenMintage.Category storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "struct ViewTokenMintage.Category storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1143,
+                                  "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                  "value": "categories"
+                                },
+                                "id": 1206,
+                                "name": "Identifier",
+                                "src": "1197:10:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint8",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                          "typeString": "enum ViewTokenMintage.CategoryId"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint8)",
+                                      "value": "uint8"
+                                    },
+                                    "id": 1207,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "1208:5:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "member_name": "Bounties",
+                                      "referencedDeclaration": null,
+                                      "type": "enum ViewTokenMintage.CategoryId"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1132,
+                                          "type": "type(enum ViewTokenMintage.CategoryId)",
+                                          "value": "CategoryId"
+                                        },
+                                        "id": 1208,
+                                        "name": "Identifier",
+                                        "src": "1214:10:7"
+                                      }
+                                    ],
+                                    "id": 1209,
+                                    "name": "MemberAccess",
+                                    "src": "1214:19:7"
+                                  }
+                                ],
+                                "id": 1210,
+                                "name": "FunctionCall",
+                                "src": "1208:26:7"
+                              }
+                            ],
+                            "id": 1211,
+                            "name": "IndexAccess",
+                            "src": "1197:38:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct ViewTokenMintage.Category memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_rational_113528000000000000000000_by_1",
+                                      "typeString": "int_const 113528000000000000000000"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1137,
+                                  "type": "type(struct ViewTokenMintage.Category storage pointer)",
+                                  "value": "Category"
+                                },
+                                "id": 1212,
+                                "name": "Identifier",
+                                "src": "1240:8:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "*",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "hexvalue": "33",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "subdenomination": null,
+                                      "token": "number",
+                                      "type": "int_const 3",
+                                      "value": "3"
+                                    },
+                                    "id": 1213,
+                                    "name": "Literal",
+                                    "src": "1249:1:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1161,
+                                      "type": "uint256",
+                                      "value": "MILLION"
+                                    },
+                                    "id": 1214,
+                                    "name": "Identifier",
+                                    "src": "1253:7:7"
+                                  }
+                                ],
+                                "id": 1215,
+                                "name": "BinaryOperation",
+                                "src": "1249:11:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "313133353238",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": "ether",
+                                  "token": "number",
+                                  "type": "int_const 113528000000000000000000",
+                                  "value": "113528"
+                                },
+                                "id": 1216,
+                                "name": "Literal",
+                                "src": "1262:12:7"
+                              }
+                            ],
+                            "id": 1217,
+                            "name": "FunctionCall",
+                            "src": "1240:35:7"
+                          }
+                        ],
+                        "id": 1218,
+                        "name": "Assignment",
+                        "src": "1197:78:7"
+                      }
+                    ],
+                    "id": 1219,
+                    "name": "ExpressionStatement",
+                    "src": "1197:78:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "struct ViewTokenMintage.Category storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "struct ViewTokenMintage.Category storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1143,
+                                  "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                  "value": "categories"
+                                },
+                                "id": 1220,
+                                "name": "Identifier",
+                                "src": "1285:10:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint8",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                          "typeString": "enum ViewTokenMintage.CategoryId"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint8)",
+                                      "value": "uint8"
+                                    },
+                                    "id": 1221,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "1296:5:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "member_name": "SeedSale",
+                                      "referencedDeclaration": null,
+                                      "type": "enum ViewTokenMintage.CategoryId"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1132,
+                                          "type": "type(enum ViewTokenMintage.CategoryId)",
+                                          "value": "CategoryId"
+                                        },
+                                        "id": 1222,
+                                        "name": "Identifier",
+                                        "src": "1302:10:7"
+                                      }
+                                    ],
+                                    "id": 1223,
+                                    "name": "MemberAccess",
+                                    "src": "1302:19:7"
+                                  }
+                                ],
+                                "id": 1224,
+                                "name": "FunctionCall",
+                                "src": "1296:26:7"
+                              }
+                            ],
+                            "id": 1225,
+                            "name": "IndexAccess",
+                            "src": "1285:38:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct ViewTokenMintage.Category memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1137,
+                                  "type": "type(struct ViewTokenMintage.Category storage pointer)",
+                                  "value": "Category"
+                                },
+                                "id": 1226,
+                                "name": "Identifier",
+                                "src": "1328:8:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "*",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "hexvalue": "3130",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "subdenomination": null,
+                                      "token": "number",
+                                      "type": "int_const 10",
+                                      "value": "10"
+                                    },
+                                    "id": 1227,
+                                    "name": "Literal",
+                                    "src": "1337:2:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1161,
+                                      "type": "uint256",
+                                      "value": "MILLION"
+                                    },
+                                    "id": 1228,
+                                    "name": "Identifier",
+                                    "src": "1342:7:7"
+                                  }
+                                ],
+                                "id": 1229,
+                                "name": "BinaryOperation",
+                                "src": "1337:12:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "*",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "hexvalue": "3130",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "subdenomination": null,
+                                      "token": "number",
+                                      "type": "int_const 10",
+                                      "value": "10"
+                                    },
+                                    "id": 1230,
+                                    "name": "Literal",
+                                    "src": "1351:2:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1161,
+                                      "type": "uint256",
+                                      "value": "MILLION"
+                                    },
+                                    "id": 1231,
+                                    "name": "Identifier",
+                                    "src": "1356:7:7"
+                                  }
+                                ],
+                                "id": 1232,
+                                "name": "BinaryOperation",
+                                "src": "1351:12:7"
+                              }
+                            ],
+                            "id": 1233,
+                            "name": "FunctionCall",
+                            "src": "1328:36:7"
+                          }
+                        ],
+                        "id": 1234,
+                        "name": "Assignment",
+                        "src": "1285:79:7"
+                      }
+                    ],
+                    "id": 1235,
+                    "name": "ExpressionStatement",
+                    "src": "1285:79:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "struct ViewTokenMintage.Category storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "type": "struct ViewTokenMintage.Category storage ref"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1143,
+                                  "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                  "value": "categories"
+                                },
+                                "id": 1236,
+                                "name": "Identifier",
+                                "src": "1374:10:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint8",
+                                  "type_conversion": true
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                          "typeString": "enum ViewTokenMintage.CategoryId"
+                                        }
+                                      ],
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "type": "type(uint8)",
+                                      "value": "uint8"
+                                    },
+                                    "id": 1237,
+                                    "name": "ElementaryTypeNameExpression",
+                                    "src": "1385:5:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "member_name": "MainSale",
+                                      "referencedDeclaration": null,
+                                      "type": "enum ViewTokenMintage.CategoryId"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1132,
+                                          "type": "type(enum ViewTokenMintage.CategoryId)",
+                                          "value": "CategoryId"
+                                        },
+                                        "id": 1238,
+                                        "name": "Identifier",
+                                        "src": "1391:10:7"
+                                      }
+                                    ],
+                                    "id": 1239,
+                                    "name": "MemberAccess",
+                                    "src": "1391:19:7"
+                                  }
+                                ],
+                                "id": 1240,
+                                "name": "FunctionCall",
+                                "src": "1385:26:7"
+                              }
+                            ],
+                            "id": 1241,
+                            "name": "IndexAccess",
+                            "src": "1374:38:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": true,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "struct ViewTokenMintage.Category memory",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_uint256",
+                                      "typeString": "uint256"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1137,
+                                  "type": "type(struct ViewTokenMintage.Category storage pointer)",
+                                  "value": "Category"
+                                },
+                                "id": 1242,
+                                "name": "Identifier",
+                                "src": "1417:8:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "*",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "hexvalue": "3430",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "subdenomination": null,
+                                      "token": "number",
+                                      "type": "int_const 40",
+                                      "value": "40"
+                                    },
+                                    "id": 1243,
+                                    "name": "Literal",
+                                    "src": "1426:2:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1161,
+                                      "type": "uint256",
+                                      "value": "MILLION"
+                                    },
+                                    "id": 1244,
+                                    "name": "Identifier",
+                                    "src": "1431:7:7"
+                                  }
+                                ],
+                                "id": 1245,
+                                "name": "BinaryOperation",
+                                "src": "1426:12:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": "ether",
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 1246,
+                                "name": "Literal",
+                                "src": "1440:7:7"
+                              }
+                            ],
+                            "id": 1247,
+                            "name": "FunctionCall",
+                            "src": "1417:31:7"
+                          }
+                        ],
+                        "id": 1248,
+                        "name": "Assignment",
+                        "src": "1374:74:7"
+                      }
+                    ],
+                    "id": 1249,
+                    "name": "ExpressionStatement",
+                    "src": "1374:74:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1374,
+                              "type": "function (bool) pure",
+                              "value": "assert"
+                            },
+                            "id": 1250,
+                            "name": "Identifier",
+                            "src": "1534:6:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "commonType": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "==",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "arguments": [
+                                    null
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint256",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        null
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1370,
+                                      "type": "function () view returns (uint256)",
+                                      "value": "totalMintLimit"
+                                    },
+                                    "id": 1251,
+                                    "name": "Identifier",
+                                    "src": "1541:14:7"
+                                  }
+                                ],
+                                "id": 1252,
+                                "name": "FunctionCall",
+                                "src": "1541:16:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "commonType": {
+                                    "typeIdentifier": "t_uint256",
+                                    "typeString": "uint256"
+                                  },
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "*",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "hexvalue": "313030",
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": true,
+                                      "lValueRequested": false,
+                                      "subdenomination": null,
+                                      "token": "number",
+                                      "type": "int_const 100",
+                                      "value": "100"
+                                    },
+                                    "id": 1253,
+                                    "name": "Literal",
+                                    "src": "1561:3:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1161,
+                                      "type": "uint256",
+                                      "value": "MILLION"
+                                    },
+                                    "id": 1254,
+                                    "name": "Identifier",
+                                    "src": "1567:7:7"
+                                  }
+                                ],
+                                "id": 1255,
+                                "name": "BinaryOperation",
+                                "src": "1561:13:7"
+                              }
+                            ],
+                            "id": 1256,
+                            "name": "BinaryOperation",
+                            "src": "1541:33:7"
+                          }
+                        ],
+                        "id": 1257,
+                        "name": "FunctionCall",
+                        "src": "1534:41:7"
+                      }
+                    ],
+                    "id": 1258,
+                    "name": "ExpressionStatement",
+                    "src": "1534:41:7"
+                  }
+                ],
+                "id": 1259,
+                "name": "Block",
+                "src": "865:717:7"
+              }
+            ],
+            "id": 1260,
+            "name": "FunctionDefinition",
+            "src": "812:770:7"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "name": "mint",
+              "payable": false,
+              "scope": 1371,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "recipient",
+                      "scope": 1327,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 1261,
+                        "name": "ElementaryTypeName",
+                        "src": "1602:7:7"
+                      }
+                    ],
+                    "id": 1262,
+                    "name": "VariableDeclaration",
+                    "src": "1602:17:7"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "tokens",
+                      "scope": 1327,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 1263,
+                        "name": "ElementaryTypeName",
+                        "src": "1621:4:7"
+                      }
+                    ],
+                    "id": 1264,
+                    "name": "VariableDeclaration",
+                    "src": "1621:11:7"
+                  },
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "categoryId",
+                      "scope": 1327,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "enum ViewTokenMintage.CategoryId",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "CategoryId",
+                          "referencedDeclaration": 1132,
+                          "type": "enum ViewTokenMintage.CategoryId"
+                        },
+                        "id": 1265,
+                        "name": "UserDefinedTypeName",
+                        "src": "1634:10:7"
+                      }
+                    ],
+                    "id": 1266,
+                    "name": "VariableDeclaration",
+                    "src": "1634:21:7"
+                  }
+                ],
+                "id": 1267,
+                "name": "ParameterList",
+                "src": "1601:55:7"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1270,
+                "name": "ParameterList",
+                "src": "1669:0:7"
+              },
+              {
+                "attributes": {
+                  "arguments": [
+                    null
+                  ]
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 87,
+                      "type": "modifier ()",
+                      "value": "auth"
+                    },
+                    "id": 1268,
+                    "name": "Identifier",
+                    "src": "1664:4:7"
+                  }
+                ],
+                "id": 1269,
+                "name": "ModifierInvocation",
+                "src": "1664:4:7"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1386,
+                              "type": "function (bool) pure",
+                              "value": "require"
+                            },
+                            "id": 1271,
+                            "name": "Identifier",
+                            "src": "1679:7:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "commonType": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": ">",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1264,
+                                  "type": "uint256",
+                                  "value": "tokens"
+                                },
+                                "id": 1272,
+                                "name": "Identifier",
+                                "src": "1687:6:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 1273,
+                                "name": "Literal",
+                                "src": "1696:1:7"
+                              }
+                            ],
+                            "id": 1274,
+                            "name": "BinaryOperation",
+                            "src": "1687:10:7"
+                          }
+                        ],
+                        "id": 1275,
+                        "name": "FunctionCall",
+                        "src": "1679:19:7"
+                      }
+                    ],
+                    "id": 1276,
+                    "name": "ExpressionStatement",
+                    "src": "1679:19:7"
+                  },
+                  {
+                    "attributes": {
+                      "assignments": [
+                        1278
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "name": "category",
+                          "scope": 1327,
+                          "stateVariable": false,
+                          "storageLocation": "storage",
+                          "type": "struct ViewTokenMintage.Category storage pointer",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "contractScope": null,
+                              "name": "Category",
+                              "referencedDeclaration": 1137,
+                              "type": "struct ViewTokenMintage.Category storage pointer"
+                            },
+                            "id": 1277,
+                            "name": "UserDefinedTypeName",
+                            "src": "1708:8:7"
+                          }
+                        ],
+                        "id": 1278,
+                        "name": "VariableDeclaration",
+                        "src": "1708:25:7"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "type": "struct ViewTokenMintage.Category storage ref"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1143,
+                              "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                              "value": "categories"
+                            },
+                            "id": 1279,
+                            "name": "Identifier",
+                            "src": "1736:10:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "uint8",
+                              "type_conversion": true
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                      "typeString": "enum ViewTokenMintage.CategoryId"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "type": "type(uint8)",
+                                  "value": "uint8"
+                                },
+                                "id": 1280,
+                                "name": "ElementaryTypeNameExpression",
+                                "src": "1747:5:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1266,
+                                  "type": "enum ViewTokenMintage.CategoryId",
+                                  "value": "categoryId"
+                                },
+                                "id": 1281,
+                                "name": "Identifier",
+                                "src": "1753:10:7"
+                              }
+                            ],
+                            "id": 1282,
+                            "name": "FunctionCall",
+                            "src": "1747:17:7"
+                          }
+                        ],
+                        "id": 1283,
+                        "name": "IndexAccess",
+                        "src": "1736:29:7"
+                      }
+                    ],
+                    "id": 1284,
+                    "name": "VariableDeclarationStatement",
+                    "src": "1708:57:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1386,
+                              "type": "function (bool) pure",
+                              "value": "require"
+                            },
+                            "id": 1285,
+                            "name": "Identifier",
+                            "src": "1775:7:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "commonType": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "<=",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "isStructConstructorCall": false,
+                                  "lValueRequested": false,
+                                  "names": [
+                                    null
+                                  ],
+                                  "type": "uint256",
+                                  "type_conversion": false
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": [
+                                        {
+                                          "typeIdentifier": "t_uint256",
+                                          "typeString": "uint256"
+                                        },
+                                        {
+                                          "typeIdentifier": "t_uint256",
+                                          "typeString": "uint256"
+                                        }
+                                      ],
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 410,
+                                      "type": "function (uint256,uint256) pure returns (uint256)",
+                                      "value": "add"
+                                    },
+                                    "id": 1286,
+                                    "name": "Identifier",
+                                    "src": "1783:3:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1264,
+                                      "type": "uint256",
+                                      "value": "tokens"
+                                    },
+                                    "id": 1287,
+                                    "name": "Identifier",
+                                    "src": "1787:6:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": true,
+                                      "isPure": false,
+                                      "lValueRequested": false,
+                                      "member_name": "amountMinted",
+                                      "referencedDeclaration": 1136,
+                                      "type": "uint256"
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1278,
+                                          "type": "struct ViewTokenMintage.Category storage pointer",
+                                          "value": "category"
+                                        },
+                                        "id": 1288,
+                                        "name": "Identifier",
+                                        "src": "1795:8:7"
+                                      }
+                                    ],
+                                    "id": 1289,
+                                    "name": "MemberAccess",
+                                    "src": "1795:21:7"
+                                  }
+                                ],
+                                "id": 1290,
+                                "name": "FunctionCall",
+                                "src": "1783:34:7"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "mintLimit",
+                                  "referencedDeclaration": 1134,
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1278,
+                                      "type": "struct ViewTokenMintage.Category storage pointer",
+                                      "value": "category"
+                                    },
+                                    "id": 1291,
+                                    "name": "Identifier",
+                                    "src": "1821:8:7"
+                                  }
+                                ],
+                                "id": 1292,
+                                "name": "MemberAccess",
+                                "src": "1821:18:7"
+                              }
+                            ],
+                            "id": 1293,
+                            "name": "BinaryOperation",
+                            "src": "1783:56:7"
+                          }
+                        ],
+                        "id": 1294,
+                        "name": "FunctionCall",
+                        "src": "1775:65:7"
+                      }
+                    ],
+                    "id": 1295,
+                    "name": "ExpressionStatement",
+                    "src": "1775:65:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "+=",
+                          "type": "uint256"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": true,
+                              "isPure": false,
+                              "lValueRequested": true,
+                              "member_name": "amountMinted",
+                              "referencedDeclaration": 1136,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": true,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "type": "struct ViewTokenMintage.Category storage ref"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1143,
+                                      "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                      "value": "categories"
+                                    },
+                                    "id": 1296,
+                                    "name": "Identifier",
+                                    "src": "1851:10:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "isStructConstructorCall": false,
+                                      "lValueRequested": false,
+                                      "names": [
+                                        null
+                                      ],
+                                      "type": "uint8",
+                                      "type_conversion": true
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": [
+                                            {
+                                              "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                              "typeString": "enum ViewTokenMintage.CategoryId"
+                                            }
+                                          ],
+                                          "isConstant": false,
+                                          "isLValue": false,
+                                          "isPure": true,
+                                          "lValueRequested": false,
+                                          "type": "type(uint8)",
+                                          "value": "uint8"
+                                        },
+                                        "id": 1297,
+                                        "name": "ElementaryTypeNameExpression",
+                                        "src": "1862:5:7"
+                                      },
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1266,
+                                          "type": "enum ViewTokenMintage.CategoryId",
+                                          "value": "categoryId"
+                                        },
+                                        "id": 1298,
+                                        "name": "Identifier",
+                                        "src": "1868:10:7"
+                                      }
+                                    ],
+                                    "id": 1299,
+                                    "name": "FunctionCall",
+                                    "src": "1862:17:7"
+                                  }
+                                ],
+                                "id": 1300,
+                                "name": "IndexAccess",
+                                "src": "1851:29:7"
+                              }
+                            ],
+                            "id": 1301,
+                            "name": "MemberAccess",
+                            "src": "1851:42:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1264,
+                              "type": "uint256",
+                              "value": "tokens"
+                            },
+                            "id": 1302,
+                            "name": "Identifier",
+                            "src": "1897:6:7"
+                          }
+                        ],
+                        "id": 1303,
+                        "name": "Assignment",
+                        "src": "1851:52:7"
+                      }
+                    ],
+                    "id": 1304,
+                    "name": "ExpressionStatement",
+                    "src": "1851:52:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_ViewTokenMintage_$1371",
+                                  "typeString": "contract ViewTokenMintage"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "mint",
+                              "referencedDeclaration": 1030,
+                              "type": "function (address,uint256) external"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1139,
+                                  "type": "contract DSToken",
+                                  "value": "viewToken"
+                                },
+                                "id": 1305,
+                                "name": "Identifier",
+                                "src": "1913:9:7"
+                              }
+                            ],
+                            "id": 1307,
+                            "name": "MemberAccess",
+                            "src": "1913:14:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1414,
+                              "type": "contract ViewTokenMintage",
+                              "value": "this"
+                            },
+                            "id": 1308,
+                            "name": "Identifier",
+                            "src": "1928:4:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1264,
+                              "type": "uint256",
+                              "value": "tokens"
+                            },
+                            "id": 1309,
+                            "name": "Identifier",
+                            "src": "1934:6:7"
+                          }
+                        ],
+                        "id": 1310,
+                        "name": "FunctionCall",
+                        "src": "1913:28:7"
+                      }
+                    ],
+                    "id": 1311,
+                    "name": "ExpressionStatement",
+                    "src": "1913:28:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "bool",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_ViewTokenMintage_$1371",
+                                  "typeString": "contract ViewTokenMintage"
+                                },
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "transferFrom",
+                              "referencedDeclaration": 925,
+                              "type": "function (address,address,uint256) external returns (bool)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1139,
+                                  "type": "contract DSToken",
+                                  "value": "viewToken"
+                                },
+                                "id": 1312,
+                                "name": "Identifier",
+                                "src": "1951:9:7"
+                              }
+                            ],
+                            "id": 1314,
+                            "name": "MemberAccess",
+                            "src": "1951:22:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1414,
+                              "type": "contract ViewTokenMintage",
+                              "value": "this"
+                            },
+                            "id": 1315,
+                            "name": "Identifier",
+                            "src": "1974:4:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1262,
+                              "type": "address",
+                              "value": "recipient"
+                            },
+                            "id": 1316,
+                            "name": "Identifier",
+                            "src": "1980:9:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1264,
+                              "type": "uint256",
+                              "value": "tokens"
+                            },
+                            "id": 1317,
+                            "name": "Identifier",
+                            "src": "1991:6:7"
+                          }
+                        ],
+                        "id": 1318,
+                        "name": "FunctionCall",
+                        "src": "1951:47:7"
+                      }
+                    ],
+                    "id": 1319,
+                    "name": "ExpressionStatement",
+                    "src": "1951:47:7"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint256",
+                                  "typeString": "uint256"
+                                },
+                                {
+                                  "typeIdentifier": "t_enum$_CategoryId_$1132",
+                                  "typeString": "enum ViewTokenMintage.CategoryId"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1151,
+                              "type": "function (address,uint256,enum ViewTokenMintage.CategoryId)",
+                              "value": "TokensMinted"
+                            },
+                            "id": 1320,
+                            "name": "Identifier",
+                            "src": "2008:12:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1262,
+                              "type": "address",
+                              "value": "recipient"
+                            },
+                            "id": 1321,
+                            "name": "Identifier",
+                            "src": "2021:9:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1264,
+                              "type": "uint256",
+                              "value": "tokens"
+                            },
+                            "id": 1322,
+                            "name": "Identifier",
+                            "src": "2032:6:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1266,
+                              "type": "enum ViewTokenMintage.CategoryId",
+                              "value": "categoryId"
+                            },
+                            "id": 1323,
+                            "name": "Identifier",
+                            "src": "2040:10:7"
+                          }
+                        ],
+                        "id": 1324,
+                        "name": "FunctionCall",
+                        "src": "2008:43:7"
+                      }
+                    ],
+                    "id": 1325,
+                    "name": "ExpressionStatement",
+                    "src": "2008:43:7"
+                  }
+                ],
+                "id": 1326,
+                "name": "Block",
+                "src": "1669:389:7"
+              }
+            ],
+            "id": 1327,
+            "name": "FunctionDefinition",
+            "src": "1588:470:7"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": false,
+              "name": "destruct",
+              "payable": false,
+              "scope": 1371,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "addr",
+                      "scope": 1339,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "address",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": "address"
+                        },
+                        "id": 1328,
+                        "name": "ElementaryTypeName",
+                        "src": "2082:7:7"
+                      }
+                    ],
+                    "id": 1329,
+                    "name": "VariableDeclaration",
+                    "src": "2082:12:7"
+                  }
+                ],
+                "id": 1330,
+                "name": "ParameterList",
+                "src": "2081:14:7"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1333,
+                "name": "ParameterList",
+                "src": "2108:0:7"
+              },
+              {
+                "attributes": {
+                  "arguments": [
+                    null
+                  ]
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "overloadedDeclarations": [
+                        null
+                      ],
+                      "referencedDeclaration": 87,
+                      "type": "modifier ()",
+                      "value": "auth"
+                    },
+                    "id": 1331,
+                    "name": "Identifier",
+                    "src": "2103:4:7"
+                  }
+                ],
+                "id": 1332,
+                "name": "ModifierInvocation",
+                "src": "2103:4:7"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1389,
+                              "type": "function (address)",
+                              "value": "selfdestruct"
+                            },
+                            "id": 1334,
+                            "name": "Identifier",
+                            "src": "2118:12:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1329,
+                              "type": "address",
+                              "value": "addr"
+                            },
+                            "id": 1335,
+                            "name": "Identifier",
+                            "src": "2131:4:7"
+                          }
+                        ],
+                        "id": 1336,
+                        "name": "FunctionCall",
+                        "src": "2118:18:7"
+                      }
+                    ],
+                    "id": 1337,
+                    "name": "ExpressionStatement",
+                    "src": "2118:18:7"
+                  }
+                ],
+                "id": 1338,
+                "name": "Block",
+                "src": "2108:35:7"
+              }
+            ],
+            "id": 1339,
+            "name": "FunctionDefinition",
+            "src": "2064:79:7"
+          },
+          {
+            "attributes": {
+              "constant": true,
+              "implemented": true,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "totalMintLimit",
+              "payable": false,
+              "scope": 1371,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1340,
+                "name": "ParameterList",
+                "src": "2172:2:7"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "total",
+                      "scope": 1370,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 1341,
+                        "name": "ElementaryTypeName",
+                        "src": "2196:4:7"
+                      }
+                    ],
+                    "id": 1342,
+                    "name": "VariableDeclaration",
+                    "src": "2196:10:7"
+                  }
+                ],
+                "id": 1343,
+                "name": "ParameterList",
+                "src": "2195:12:7"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "assignments": [
+                            1345
+                          ]
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "constant": false,
+                              "name": "i",
+                              "scope": 1370,
+                              "stateVariable": false,
+                              "storageLocation": "default",
+                              "type": "uint8",
+                              "value": null,
+                              "visibility": "internal"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "name": "uint8",
+                                  "type": "uint8"
+                                },
+                                "id": 1344,
+                                "name": "ElementaryTypeName",
+                                "src": "2221:5:7"
+                              }
+                            ],
+                            "id": 1345,
+                            "name": "VariableDeclaration",
+                            "src": "2221:7:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "30",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "number",
+                              "type": "int_const 0",
+                              "value": "0"
+                            },
+                            "id": 1346,
+                            "name": "Literal",
+                            "src": "2231:1:7"
+                          }
+                        ],
+                        "id": 1347,
+                        "name": "VariableDeclarationStatement",
+                        "src": "2221:11:7"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "commonType": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          },
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "<",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1345,
+                              "type": "uint8",
+                              "value": "i"
+                            },
+                            "id": 1348,
+                            "name": "Identifier",
+                            "src": "2234:1:7"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "length",
+                              "referencedDeclaration": null,
+                              "type": "uint256"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1143,
+                                  "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                  "value": "categories"
+                                },
+                                "id": 1349,
+                                "name": "Identifier",
+                                "src": "2238:10:7"
+                              }
+                            ],
+                            "id": 1350,
+                            "name": "MemberAccess",
+                            "src": "2238:17:7"
+                          }
+                        ],
+                        "id": 1351,
+                        "name": "BinaryOperation",
+                        "src": "2234:21:7"
+                      },
+                      {
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "++",
+                              "prefix": false,
+                              "type": "uint8"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1345,
+                                  "type": "uint8",
+                                  "value": "i"
+                                },
+                                "id": 1352,
+                                "name": "Identifier",
+                                "src": "2257:1:7"
+                              }
+                            ],
+                            "id": 1353,
+                            "name": "UnaryOperation",
+                            "src": "2257:4:7"
+                          }
+                        ],
+                        "id": 1354,
+                        "name": "ExpressionStatement",
+                        "src": "2257:4:7"
+                      },
+                      {
+                        "children": [
+                          {
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "operator": "=",
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1342,
+                                      "type": "uint256",
+                                      "value": "total"
+                                    },
+                                    "id": 1355,
+                                    "name": "Identifier",
+                                    "src": "2273:5:7"
+                                  },
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "isConstant": false,
+                                      "isLValue": false,
+                                      "isPure": false,
+                                      "isStructConstructorCall": false,
+                                      "lValueRequested": false,
+                                      "names": [
+                                        null
+                                      ],
+                                      "type": "uint256",
+                                      "type_conversion": false
+                                    },
+                                    "children": [
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": [
+                                            {
+                                              "typeIdentifier": "t_uint256",
+                                              "typeString": "uint256"
+                                            },
+                                            {
+                                              "typeIdentifier": "t_uint256",
+                                              "typeString": "uint256"
+                                            }
+                                          ],
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 410,
+                                          "type": "function (uint256,uint256) pure returns (uint256)",
+                                          "value": "add"
+                                        },
+                                        "id": 1356,
+                                        "name": "Identifier",
+                                        "src": "2281:3:7"
+                                      },
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "overloadedDeclarations": [
+                                            null
+                                          ],
+                                          "referencedDeclaration": 1342,
+                                          "type": "uint256",
+                                          "value": "total"
+                                        },
+                                        "id": 1357,
+                                        "name": "Identifier",
+                                        "src": "2285:5:7"
+                                      },
+                                      {
+                                        "attributes": {
+                                          "argumentTypes": null,
+                                          "isConstant": false,
+                                          "isLValue": true,
+                                          "isPure": false,
+                                          "lValueRequested": false,
+                                          "member_name": "mintLimit",
+                                          "referencedDeclaration": 1134,
+                                          "type": "uint256"
+                                        },
+                                        "children": [
+                                          {
+                                            "attributes": {
+                                              "argumentTypes": null,
+                                              "isConstant": false,
+                                              "isLValue": true,
+                                              "isPure": false,
+                                              "lValueRequested": false,
+                                              "type": "struct ViewTokenMintage.Category storage ref"
+                                            },
+                                            "children": [
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "overloadedDeclarations": [
+                                                    null
+                                                  ],
+                                                  "referencedDeclaration": 1143,
+                                                  "type": "struct ViewTokenMintage.Category storage ref[6] storage ref",
+                                                  "value": "categories"
+                                                },
+                                                "id": 1358,
+                                                "name": "Identifier",
+                                                "src": "2292:10:7"
+                                              },
+                                              {
+                                                "attributes": {
+                                                  "argumentTypes": null,
+                                                  "overloadedDeclarations": [
+                                                    null
+                                                  ],
+                                                  "referencedDeclaration": 1345,
+                                                  "type": "uint8",
+                                                  "value": "i"
+                                                },
+                                                "id": 1359,
+                                                "name": "Identifier",
+                                                "src": "2303:1:7"
+                                              }
+                                            ],
+                                            "id": 1360,
+                                            "name": "IndexAccess",
+                                            "src": "2292:13:7"
+                                          }
+                                        ],
+                                        "id": 1361,
+                                        "name": "MemberAccess",
+                                        "src": "2292:23:7"
+                                      }
+                                    ],
+                                    "id": 1362,
+                                    "name": "FunctionCall",
+                                    "src": "2281:35:7"
+                                  }
+                                ],
+                                "id": 1363,
+                                "name": "Assignment",
+                                "src": "2273:43:7"
+                              }
+                            ],
+                            "id": 1364,
+                            "name": "ExpressionStatement",
+                            "src": "2273:43:7"
+                          }
+                        ],
+                        "id": 1365,
+                        "name": "Block",
+                        "src": "2263:62:7"
+                      }
+                    ],
+                    "id": 1366,
+                    "name": "ForStatement",
+                    "src": "2216:109:7"
+                  },
+                  {
+                    "attributes": {
+                      "functionReturnParameters": 1343
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "overloadedDeclarations": [
+                            null
+                          ],
+                          "referencedDeclaration": 1342,
+                          "type": "uint256",
+                          "value": "total"
+                        },
+                        "id": 1367,
+                        "name": "Identifier",
+                        "src": "2340:5:7"
+                      }
+                    ],
+                    "id": 1368,
+                    "name": "Return",
+                    "src": "2333:12:7"
+                  }
+                ],
+                "id": 1369,
+                "name": "Block",
+                "src": "2208:144:7"
+              }
+            ],
+            "id": 1370,
+            "name": "FunctionDefinition",
+            "src": "2149:203:7"
+          }
+        ],
+        "id": 1371,
+        "name": "ContractDefinition",
+        "src": "373:1981:7"
+      }
+    ],
+    "id": 1372,
+    "name": "SourceUnit",
+    "src": "73:2282:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.19+commit.c4cbbb05.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-03-01T01:38:31.946Z"
+}

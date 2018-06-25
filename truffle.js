@@ -11,7 +11,7 @@ module.exports = {
             network_id: 1,
             host: "127.0.0.1",
             port: 8545,
-            gasPrice: 2000000000, // 2 gwei
+            gasPrice: 20000000000, // 20 gwei
             from: "0x00Db81D2d33b8Ef69a62e3b31bF769a12124C5E8" // deployer
         },
         kovan: {

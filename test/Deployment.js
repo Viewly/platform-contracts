@@ -14,7 +14,7 @@ contract('DSToken', function(accounts) {
             assert.equal(
                 supply.valueOf(),
                 0,
-                "SToken Supply is not 0");
+                "DSToken Supply is not 0");
         });
     });
     it("should have the correct owner", function() {
@@ -48,11 +48,11 @@ contract('VideoPublisher', function(accounts) {
     });
     it("should have correct starting price", function() {
         return VideoPublisher.deployed().then(function(instance) {
-            return instance.price.call();
+            return instance.priceView.call();
         }).then(function(price) {
             assert.equal(
                 price.valueOf(),
-                web3.toWei(10, 'ether'),
+                web3.toWei(20, 'ether'),
                 'Invalid starting price');
         });
     });

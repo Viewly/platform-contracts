@@ -27,10 +27,11 @@ contract('VideoPublisher', (accounts) => {
     let buyerWithoutFundsDeposit = web3.toWei(1, 'ether')
 
     let price = web3.toWei(10, 'ether')
+    let priceEth = web3.toWei(0.01, 'ether')
 
     beforeEach(async () => {
         viewToken = await DSToken.new('VIEW')
-        instance = await VideoPublisher.new(viewToken.address, price)
+        instance = await VideoPublisher.new(viewToken.address, price, priceEth)
 
         // due to a bug in truffle (function overloading)
         // tokens can be minted to owner account only
@@ -50,23 +51,23 @@ contract('VideoPublisher', (accounts) => {
             let result = await instance.publish(videoID, {from: buyerWithFunds})
 
             // check if video is published
-            assert.equal((await instance.videos.call(videoID)), true)
+            assert.equal((await instance.videos.call(videoID)), buyerWithFunds)
 
             // check if event fired properly
             assert.lengthOf(result.logs, 1);
             let event = result.logs[0];
             assert.equal(event.event, 'Published');
             assert.equal(event.args.videoID, videoID);
-            assert.equal(Number(event.args.price), (await instance.price.call()));
+            // assert.equal(Number(event.args.price), (await instance.price.call()));
 
             // check if funds were deducted/credited properly
             let remainingBlance = (await viewToken.balanceOf(buyerWithFunds)).toNumber()
             assert.equal(
                 remainingBlance,
-                buyerWithFundsDeposit - (await instance.price.call()).toNumber())
+                buyerWithFundsDeposit - (await instance.priceView.call()).toNumber())
             assert.equal(
                 (await viewToken.balanceOf(instance.address)).toNumber(),
-                (await instance.price.call()).toNumber())
+                (await instance.priceView.call()).toNumber())
         })
 
         it('should fail if same video is published twice', async () => {
@@ -83,15 +84,17 @@ contract('VideoPublisher', (accounts) => {
         })
     })
 
-    describe('setPrice', async() => {
+    describe('setPrices', async() => {
         it('should let owner change the price', async () => {
             let newPrice = web3.toWei(20, 'ether')
-            await instance.setPrice(newPrice, {from: owner})
-            assert.equal((await instance.price.call()), newPrice, 'Invalid New Price')
+            let newPriceEth = web3.toWei(0.02, 'ether')
+            await instance.setPrices(newPrice, newPriceEth, {from: owner})
+            assert.equal((await instance.priceView.call()), newPrice, 'Invalid New Price')
         })
         it('should not let unauthorized user change the price', async () => {
             let newPrice = web3.toWei(20, 'ether')
-            await expectRevert(instance.setPrice(newPrice, {from: buyerWithFunds}))
+            let newPriceEth = web3.toWei(0.02, 'ether')
+            await expectRevert(instance.setPrices(newPrice, newPriceEth, {from: buyerWithFunds}))
         })
     })
 
@@ -104,7 +107,7 @@ contract('VideoPublisher', (accounts) => {
                 web3.toWei(0, 'ether'))
             assert.equal(
                 (await viewToken.balanceOf(owner)).toNumber(),
-                (await instance.price.call()).toNumber())
+                (await instance.priceView.call()).toNumber())
         })
         it('should not allow unauthorized user to withdraw tokens', async () => {
             let newPrice = web3.toWei(20, 'ether')

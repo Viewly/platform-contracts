@@ -24,7 +24,7 @@ contract VideoPublisher is DSAuth, DSMath {
     }
 
     function publish(bytes12 videoID) payable public {
-        require(videos[videoID] != 0);
+        require(videos[videoID] == 0);
         if (msg.value == 0) {
             require(viewToken.transferFrom(msg.sender, this, priceView));
         } else {
@@ -35,7 +35,7 @@ contract VideoPublisher is DSAuth, DSMath {
     }
 
     function publishFor(bytes12 videoID, address beneficiary) payable public {
-        require(videos[videoID] != 0);
+        require(videos[videoID] == 0);
         if (msg.value == 0) {
             require(viewToken.transferFrom(msg.sender, this, priceView));
         } else {

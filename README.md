@@ -73,4 +73,5 @@ This would enable the community and/or stakeholders to propose parameter changes
 
 ## Mainnet contracts
 - [ViewToken](https://etherscan.io/address/0xf03f8d65bafa598611c3495124093c56e8f638f0)
-- [VideoPublisher](https://etherscan.io/address/0x9048A059c4beF8775ecF6E24197Fd987B387edc1)
+- [VideoPublisher](https://etherscan.io/address/0x9048A059c4beF8775ecF6E24197Fd987B387edc1) _(deprecated)_
+- [VideoPublisher 2.0](https://etherscan.io/address/0x54df6e2D8f0E9a015Bf804b64ed8e9BAd6ccbaca)

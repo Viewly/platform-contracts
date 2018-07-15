@@ -35,6 +35,11 @@ contract('VotingPowerDelegator', (accounts) => {
             assert.equal((await instance.delegations.call(delegator)), 0)
         })
 
+        it('should unset the delegation if delegating to self', async () => {
+            await instance.delegate(delegator, {from: delegator})
+            assert.equal((await instance.delegations.call(delegator)), 0)
+        })
+
     })
 
 })

@@ -55,13 +55,11 @@ b.) A malicious and sufficiently wealthy user could acquire control of valuable 
 
 ## VotingStakeDelegator
 
-VotingStakeDelegator allows VIEW Token holders to _delegate_ their stake - in partial or in full - to another Ethereum account. This is useful for two purposes:
+VotingStakeDelegator allows VIEW Token holders to _delegate_ the voting power belonging to their tokens to another Ethereum account, while keeping the tokens in their wallet. This is useful for two purposes:
 
-a.) **Security**. Allowing users to delegate their voting power to a convenient hot wallet, such as Metamask running in the browser.
+a.) **Security**. Allowing users to delegate their voting power to a convenient hot wallet - such as Metamask running in the browser - while keeping the tokens safe in cold storage.
 
 b.) **Liquid Democracy**. Stakeholders whom chose to abstain from participation in governance or distribution game voting may delegate their voting power to others, and enable a form of _liquid democracy_. Ideally, individuals posessing good intent, skill and effort would be the beneficiaries of the delegation. 
-
-The delegation is % based, with 3 points of precision _(delegation of 1 is 0.001% and the delegation of 100,000 is 100%)_. A stakeholder can split their delegated stake up to 255 beneficiaries.
 
 
 # Governance
@@ -75,3 +73,4 @@ This would enable the community and/or stakeholders to propose parameter changes
 - [ViewToken](https://etherscan.io/address/0xf03f8d65bafa598611c3495124093c56e8f638f0)
 - [VideoPublisher](https://etherscan.io/address/0x9048A059c4beF8775ecF6E24197Fd987B387edc1) _(deprecated)_
 - [VideoPublisher 2.0](https://etherscan.io/address/0x54df6e2D8f0E9a015Bf804b64ed8e9BAd6ccbaca)
+- [VotingStakeDelegator](https://etherscan.io/address/0x7fC7F71da6d2d9deFF5100C8F3D8e54C97697Ad2)
